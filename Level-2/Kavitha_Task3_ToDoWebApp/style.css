@@ -1,0 +1,114 @@
+:root {
+    color-scheme: light;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: rgba(148, 163, 184, 0.3);
+    --text: #0f172a;
+    --muted: #64748b;
+    --primary: #6366f1;
+    --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.16), transparent 28%),
+        var(--bg);
+    font-family: Inter, system-ui, sans-serif;
+    color: var(--text);
+}
+
+.todo-shell {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.todo-card {
+    width: min(520px, 100%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.todo-card h1 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+}
+
+.todo-form {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.todo-form input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 999px;
+    padding: 0.95rem 1.25rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    color: white;
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: #f1f5f9;
+    color: var(--text);
+}
+
+.task-item.completed {
+    opacity: 0.75;
+    text-decoration: line-through;
+}
+
+.task-item label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.delete-btn {
+    border: none;
+    background: transparent;
+    color: #ef4444;
+    font-weight: 700;
+    cursor: pointer;
+}

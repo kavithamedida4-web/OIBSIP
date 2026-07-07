@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Authentication</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="login-shell">
+        <section class="login-card">
+            <h1>Member Login</h1>
+            <p>Use the sample credentials below to sign in.</p>
+            <form id="loginForm" class="login-form">
+                <label>
+                    Email
+                    <input type="email" id="emailInput" placeholder="example@mail.com" required />
+                </label>
+                <label>
+                    Password
+                    <input type="password" id="passwordInput" placeholder="Password" required />
+                </label>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="note">Sample: <strong>user@example.com</strong> / <strong>Welcome123</strong></p>
+            <p id="message" class="message"></p>
+        </section>
+    </main>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const message = document.getElementById('message');
+
+        const credentials = {
+            email: 'user@example.com',
+            password: 'Welcome123'
+        };
+
+        loginForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (email === credentials.email && password === credentials.password) {
+                message.textContent = 'Login successful! Welcome back.';
+                message.className = 'message success';
+            } else {
+                message.textContent = 'Invalid email or password. Please try again.';
+                message.className = 'message error';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+:root {
+    color-scheme: light;
+    --bg: #fff8f3;
+    --surface: #ffffff;
+    --border: rgba(252, 211, 77, 0.25);
+    --text: #1f2937;
+    --muted: #475569;
+    --accent: #f59e0b;
+    --shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top center, rgba(251, 191, 36, 0.18), transparent 28%),
+        var(--bg);
+    font-family: Inter, system-ui, sans-serif;
+    color: var(--text);
+}
+
+.tribute-shell {
+    padding: 2rem 1rem 3rem;
+}
+
+.hero {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    background: var(--surface);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.hero-copy {
+    max-width: 720px;
+}
+
+.eyebrow {
+    margin: 0 0 1rem;
+    color: var(--accent);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.05;
+}
+
+.hero p {
+    margin: 1.25rem 0 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.content-section,
+.timeline-section {
+    max-width: 900px;
+    margin: 0 auto 1.75rem;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.bio-card,
+.timeline-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.bio-card h2,
+.timeline-section h2 {
+    margin-top: 0;
+}
+
+.bio-card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--muted);
+}
+
+.timeline {
+    display: grid;
+    gap: 1rem;
+}
+
+.timeline-item strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}

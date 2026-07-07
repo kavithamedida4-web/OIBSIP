@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Delivery App</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="pizza-shell">
+        <section class="pizza-card">
+            <h1>Pizza Delivery</h1>
+            <p>Select your pizza and delivery options below.</p>
+            <form id="pizzaForm" class="pizza-form">
+                <label>
+                    Customer Name
+                    <input type="text" id="customerName" placeholder="Your name" required />
+                </label>
+                <label>
+                    Size
+                    <select id="pizzaSize">
+                        <option value="small">Small - $8</option>
+                        <option value="medium">Medium - $11</option>
+                        <option value="large">Large - $14</option>
+                    </select>
+                </label>
+                <fieldset class="toppings-group">
+                    <legend>Toppings</legend>
+                    <label><input type="checkbox" value="1.5" /> Olives</label>
+                    <label><input type="checkbox" value="1.5" /> Mushrooms</label>
+                    <label><input type="checkbox" value="1.5" /> Peppers</label>
+                    <label><input type="checkbox" value="2" /> Pepperoni</label>
+                    <label><input type="checkbox" value="2" /> Extra cheese</label>
+                </fieldset>
+                <label>
+                    Delivery Address
+                    <textarea id="address" placeholder="Street, city, zip" rows="3" required></textarea>
+                </label>
+                <div class="order-actions">
+                    <button type="button" id="calculateBtn" class="btn btn-primary">Calculate Total</button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <p id="summaryText">Choose your options and click Calculate Total.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const pizzaForm = document.getElementById('pizzaForm');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const summaryText = document.getElementById('summaryText');
+
+        function getSizePrice(size) {
+            return size === 'small' ? 8 : size === 'medium' ? 11 : 14;
+        }
+
+        function calculateTotal() {
+            const name = document.getElementById('customerName').value.trim();
+            const size = document.getElementById('pizzaSize').value;
+            const address = document.getElementById('address').value.trim();
+            const toppings = Array.from(document.querySelectorAll('.toppings-group input:checked'));
+            const toppingCost = toppings.reduce((sum, input) => sum + Number(input.value), 0);
+            const basePrice = getSizePrice(size);
+            const total = basePrice + toppingCost;
+            const toppingNames = toppings.map(input => input.parentElement.textContent.trim());
+
+            if (!name || !address) {
+                summaryText.textContent = 'Please enter your name and delivery address.';
+                return;
+            }
+
+            summaryText.innerHTML = `
+                <strong>${name}</strong> ordered a <strong>${size}</strong> pizza.<br />
+                Toppings: ${toppingNames.length ? toppingNames.join(', ') : 'None'}.<br />
+                Delivery address: ${address}.<br />
+                <strong>Total: $${total.toFixed(2)}</strong>
+            `;
+        }
+
+        calculateBtn.addEventListener('click', calculateTotal);
+        resetBtn.addEventListener('click', () => {
+            pizzaForm.reset();
+            summaryText.textContent = 'Choose your options and click Calculate Total.';
+        });
+    </script>
+</body>
+</html>
