@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Temperature Converter</p>
+                <h1>Convert Celsius, Fahrenheit, and Kelvin instantly.</h1>
+                <p>Enter a value, choose units, and see live conversions with a single click.</p>
+            </div>
+        </section>
+
+        <section class="converter-card">
+            <div class="card-header">
+                <h2>Convert temperature</h2>
+                <p>Select input and output units below.</p>
+            </div>
+            <div class="converter-form">
+                <label>
+                    Value
+                    <input type="number" id="inputValue" placeholder="e.g. 25" />
+                </label>
+                <label>
+                    From
+                    <select id="inputUnit">
+                        <option value="celsius">Celsius (°C)</option>
+                        <option value="fahrenheit">Fahrenheit (°F)</option>
+                        <option value="kelvin">Kelvin (K)</option>
+                    </select>
+                </label>
+                <label>
+                    To
+                    <select id="outputUnit">
+                        <option value="fahrenheit">Fahrenheit (°F)</option>
+                        <option value="celsius">Celsius (°C)</option>
+                        <option value="kelvin">Kelvin (K)</option>
+                    </select>
+                </label>
+                <div class="actions">
+                    <button id="convertBtn" class="btn btn-primary">Convert</button>
+                    <button id="clearBtn" class="btn btn-secondary" type="button">Clear</button>
+                </div>
+            </div>
+
+            <div class="result-panel">
+                <h3>Result</h3>
+                <p id="resultText">Enter a value and press Convert to see the result.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const inputValue = document.getElementById('inputValue');
+        const inputUnit = document.getElementById('inputUnit');
+        const outputUnit = document.getElementById('outputUnit');
+        const resultText = document.getElementById('resultText');
+        const convertBtn = document.getElementById('convertBtn');
+        const clearBtn = document.getElementById('clearBtn');
+
+        function toCelsius(value, unit) {
+            if (unit === 'celsius') return value;
+            if (unit === 'fahrenheit') return (value - 32) * 5 / 9;
+            if (unit === 'kelvin') return value - 273.15;
+            return value;
+        }
+
+        function fromCelsius(value, unit) {
+            if (unit === 'celsius') return value;
+            if (unit === 'fahrenheit') return value * 9 / 5 + 32;
+            if (unit === 'kelvin') return value + 273.15;
+            return value;
+        }
+
+        function formatTemperature(value, unit) {
+            const rounded = Math.round(value * 100) / 100;
+            const symbol = unit === 'celsius' ? '°C' : unit === 'fahrenheit' ? '°F' : 'K';
+            return `${rounded} ${symbol}`;
+        }
+
+        function convertTemperature() {
+            const value = parseFloat(inputValue.value);
+            if (Number.isNaN(value)) {
+                resultText.textContent = 'Please enter a valid number to convert.';
+                return;
+            }
+            const fromUnit = inputUnit.value;
+            const toUnit = outputUnit.value;
+            const celsius = toCelsius(value, fromUnit);
+            const result = fromCelsius(celsius, toUnit);
+            resultText.textContent = `${formatTemperature(value, fromUnit)} = ${formatTemperature(result, toUnit)}`;
+        }
+
+        convertBtn.addEventListener('click', convertTemperature);
+        clearBtn.addEventListener('click', () => {
+            inputValue.value = '';
+            resultText.textContent = 'Enter a value and press Convert to see the result.';
+        });
+    </script>
+</body>
+</html>
